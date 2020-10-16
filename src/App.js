@@ -1,26 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import PhotoGallery from './PhotoGallery'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  images;
+  constructor(props) {
+    super(props);
+    // manually create some mock data for purpose of this exercise
+    // consists of a list of image urls and captions
+    this.images = [
+      {
+        url: "https://www.vanguardia.com/binrepository/716x477/0c0/0d0/none/12204/HXHF/web_colp_067627_f_big_ce_VL309205_MG19806587.jpg", 
+        caption: "The awe inspiring Nevado del Ruiz volcano of the Colombian Andes."
+      },
+      {
+        url: "https://www.eluniversal.com.mx/sites/default/files/2018/09/17/canon_sumidero_chiapas_r.jpg",
+        caption: "Cañon del Sumidero, the Grand Canyon of Mexico, located in the southern state of Chiapas."
+      }
+    ];
+  }
+  render () {
+    return (
+      <div className="App">
+        <PhotoGallery images={this.images} />
+      </div>
+    );
+  }
 }
 
 export default App;
