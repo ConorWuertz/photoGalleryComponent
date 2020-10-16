@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.css';
-
+import './PhotoGallery.css';
+import Image from "./Image";
 
 class PhotoGallery extends React.Component {
 
@@ -31,9 +31,7 @@ class PhotoGallery extends React.Component {
 
 
     renderCurrentImage() {
-        return (
-            <img src={ this.props.images[this.state.currImageIndex].url }></img>
-        )
+        return <Image image={this.props.images[this.state.currImageIndex]}/>
     }
 
     renderEmpty() {
