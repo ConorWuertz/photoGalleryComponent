@@ -1,5 +1,5 @@
 import React from 'react';
-import './PhotoGallery.css';
+import './PhotoGallery.scss';
 import Image from "./Image";
 
 class PhotoGallery extends React.Component {
@@ -7,6 +7,7 @@ class PhotoGallery extends React.Component {
     constructor(props) {
         super(props);
         this.renderCurrentImage =this.renderCurrentImage.bind(this);
+        this.imagesEmptyOrInvalid =this.imagesEmptyOrInvalid.bind(this);
         this.onClickLeft = this.onClickLeft.bind(this);
         this.onClickRight = this.onClickRight.bind(this);
         this.state = {
@@ -41,18 +42,33 @@ class PhotoGallery extends React.Component {
             </div>
         )
     }
+
+    imagesEmptyOrInvalid() {
+        return !this.props.images || !this.props.images.length;
+    }
+
     render () {
-        // sanity check, receiving images via props
-        console.log(this.props.images);
-        
+        let leftPointerClasses = "scrollButton scrollLeftButton";
+        if (this.imagesEmptyOrInvalid() || this.state.currImageIndex === 0) {
+            leftPointerClasses+=" disabled"
+        }
+
+        let rightPointerClasses = "scrollButton scrollRightButton";
+        if (this.imagesEmptyOrInvalid() || this.state.currImageIndex > this.props.images.length - 2) {
+            rightPointerClasses+=" disabled"
+        }
+    
         return (
             <div className={"photoGallery"}>
                 <span className={"mainHeader"}> Photo Gallery </span>
-                {   // when the images props is null or of length 0, render an empty state. Otherwise, render the currently selected image
-                    (!this.props.images || !this.props.images.length) ? this.renderEmpty() : this.renderCurrentImage()
-                }
-                <span className="scrollButton scrollLeftButton" onClick={this.onClickLeft}> Prev </span>
-                <span className="scrollButton scrollRightButton" onClick={this.onClickRight}> Next </span>
+                <div className={"horizontalContainer"}>
+                    <span className={leftPointerClasses} onClick={this.onClickLeft} />
+
+                    {   // when the images props is null or of length 0, render an empty state. Otherwise, render the currently selected image
+                        this.imagesEmptyOrInvalid() ? this.renderEmpty() : this.renderCurrentImage()
+                    }
+                    <span className={rightPointerClasses} onClick={this.onClickRight}/>
+                </div>
             </div>
         )
     }
