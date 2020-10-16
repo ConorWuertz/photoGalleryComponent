@@ -1,0 +1,11 @@
+.photoGallery {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mainHeader {
+    font-size: larger;
+    margin: 20 0 20 0;
+}
