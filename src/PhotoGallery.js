@@ -4,6 +4,17 @@ import './App.css';
 
 class PhotoGallery extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.renderCurrentImage.bind();
+    }
+
+    renderCurrentImage() {
+        return (
+            <img src={ this.props.images[0].url }></img>
+        )
+    }
+
     renderEmpty() {
         return (
             <div className={"emptyGalleryContent"}>
@@ -18,8 +29,8 @@ class PhotoGallery extends React.Component {
         return (
             <div className={"photoGallery"}>
                 <span className={"mainHeader"}> Photo Gallery </span>
-                {   // when the images props is null or of length 0, render an empty state
-                    (!this.props.images || !this.props.images.length) && this.renderEmpty()
+                {   // when the images props is null or of length 0, render an empty state. Otherwise, render the currently selected image
+                    (!this.props.images || !this.props.images.length) ? this.renderEmpty() : this.renderCurrentImage()
                 }
             </div>
         )
